@@ -32,7 +32,8 @@ async def main():
 
     print(f'共统计到 {len(counter)} 个用户')
     for uid, count in counter.most_common():
-        print(uid, count)
+        print(uid)
+#        print(uid, count)
 
 with client:
     client.loop.run_until_complete(main())
