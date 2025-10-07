@@ -26,6 +26,8 @@ async def main():
 
     # 统计用户ID
     counter = Counter()
+    
+  # 获得群组中最近的消息
     async for msg in client.iter_messages(entity, limit=MESSAGE_LIMIT):
         if msg.sender_id:
             counter[msg.sender_id] += 1
