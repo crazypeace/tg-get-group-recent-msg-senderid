@@ -1,4 +1,5 @@
 from telethon import TelegramClient
+from telethon.tl.types import Message
 from collections import Counter
 
 # 到这里申请 https://my.telegram.org/apps
@@ -29,13 +30,13 @@ async def main():
     
   # 获得群组中最近的消息
     async for msg in client.iter_messages(entity, limit=MESSAGE_LIMIT):
-        if msg.sender_id:
+        # 过滤掉进群离群的系统消息
+        if isinstance(msg, Message) and msg.sender_id:
             counter[msg.sender_id] += 1
 
     print(f'共统计到 {len(counter)} 个用户')
     for uid, count in counter.most_common():
         print(uid)
-#        print(uid, count)
 
 with client:
     client.loop.run_until_complete(main())
